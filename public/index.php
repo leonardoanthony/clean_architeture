@@ -8,6 +8,8 @@ use App\Domain\ValueObjects\Email;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
+//* Entities
+
 $registration = new Registration();
 
 $registration->setName('Leonardo Anthony')
@@ -17,13 +19,14 @@ $registration->setName('Leonardo Anthony')
     ->setRegistrationNumber(new Cpf('660.210.800-09'));
 ;
 
-// echo "<pre>";
-// print_r($registration);
-// echo "</pre>";
+//* Usecases
+
+$repository = new stdClass();
+$pdfExporter = new stdClass();
+$storage = new stdClass();
 
 
-
-$exportRegistrationUseCase = new ExportRegistration();
-$inputBoundary = new InputBoundary('660.210.800-09');
+$exportRegistrationUseCase = new ExportRegistration($repository, $pdfExporter, $storage);
+$inputBoundary = new InputBoundary('660.210.800-09', 'registration', __DIR__.'/../storage');
 $outputBoundary = $exportRegistrationUseCase->handle($inputBoundary);
 

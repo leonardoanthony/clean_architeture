@@ -6,62 +6,55 @@ namespace App\Application\Usecases\ExportRegistration;
 
 final class OutputBoundary
 {
-    private string $name;
-    private string $email;
-    private string $birthDate;
-    private string $registrationNumber;
-    private string $registrationAt;
 
-    public function __construct(array $values) {
-        $this->name = $values['name'] ?? '';
-        $this->email = $values['email'] ?? '';
-        $this->birthDate = $values['birthDate'] ?? '';
-        $this->registrationNumber = $values['registrationNumber'] ?? '';
-        $this->registrationAt = $values['registrationAt'] ?? '';
+    private string $fullFilename;
+
+    public function __construct(string $fullFilename){
+        $this->fullFilename = $fullFilename;
     }
 
-    /**
-     * @return string;
-     */
+    public function getFullFilename(): string
+    {
+        return $this->fullFilename;
+    }
 
-     public function getName(): string
-     {
-         return $this->name;
-     }
+    // private string $name;
+    // private string $email;
+    // private string $birthDate;
+    // private string $registrationNumber;
+    // private string $registrationAt;
 
-     /**
-     * @return string;
-     */
+    // public function __construct(array $values)
+    // {
+    //     $this->name = $values['name'] ?? '';
+    //     $this->email = $values['email'] ?? '';
+    //     $this->birthDate = $values['birthDate'] ?? '';
+    //     $this->registrationNumber = $values['registrationNumber'] ?? '';
+    //     $this->registrationAt = $values['registrationAt'] ?? '';
+    // }
 
-     public function getEmail(): string
-     {
-         return $this->email;
-     }
+    // public function getName(): string
+    // {
+    //     return $this->name;
+    // }
 
-     /**
-     * @return string;
-     */
+    // public function getEmail(): string
+    // {
+    //     return $this->email;
+    // }
 
-     public function getBirthDate(): string
-     {
-         return $this->birthDate;
-     }
+    // public function getBirthDate(): string
+    // {
+    //     return $this->birthDate;
+    // }
 
-     /**
-     * @return string;
-     */
+    // public function getRegistrationNumber(): string
+    // {
+    //     return $this->registrationNumber;
+    // }
 
-     public function getRegistrationNumber(): string
-     {
-         return $this->registrationNumber;
-     }
-
-     /**
-     * @return string;
-     */
-
-     public function getRegistrationAt(): string
-     {
-         return $this->registrationAt;
-     }
+    // public function getRegistrationAt(): string
+    // {
+    //     return $this->registrationAt;
+    // }
 }
