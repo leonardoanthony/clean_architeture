@@ -1,5 +1,7 @@
 <?php
 
+use App\Application\Usecases\ExportRegistration\ExportRegistration;
+use App\Application\Usecases\ExportRegistration\InputBoundary;
 use App\Domain\Entities\Registration;
 use App\Domain\ValueObjects\Cpf;
 use App\Domain\ValueObjects\Email;
@@ -15,6 +17,13 @@ $registration->setName('Leonardo Anthony')
     ->setRegistrationNumber(new Cpf('660.210.800-09'));
 ;
 
-echo "<pre>";
-print_r($registration);
-echo "</pre>";
+// echo "<pre>";
+// print_r($registration);
+// echo "</pre>";
+
+
+
+$exportRegistrationUseCase = new ExportRegistration();
+$inputBoundary = new InputBoundary('660.210.800-09');
+$outputBoundary = $exportRegistrationUseCase->handle($inputBoundary);
+

@@ -18,8 +18,7 @@ final class Cpf
     }
 
     public function __toString(): string
-    {
-        
+    {  
         return $this->cpf;
     }
 
