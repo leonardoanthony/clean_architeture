@@ -1,0 +1,19 @@
+{
+    "name": "leonardoanthony/clean-arch",
+    "description": "Clean Architeture",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Leonardo Anthony",
+            "email": "leonardoanthony.dev@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "ext-pdo": "*"
+    }
+}
