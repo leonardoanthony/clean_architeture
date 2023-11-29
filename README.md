@@ -2,3 +2,4 @@
 #2 Clean Architecture - Domain Layer
 #3 Clean Architecture - Application Layer
 #4 Clean Architecture - App Layer: PDF Tool e Storage
+#5 Clean Architecture - Infra Layer: Adaptersv
