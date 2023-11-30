@@ -7,33 +7,32 @@ use App\Domain\ValueObjects\Cpf;
 use App\Domain\ValueObjects\Email;
 use App\Infra\Adapters\Html2PdfAdapter;
 use App\Infra\Adapters\LocalStorageAdapter;
+use App\Infra\Repositories\MySQL\PdoRegistrationRepository;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-//* Entities
+$appConfig = require_once __DIR__.'/../config/app.php';
 
-$registration = new Registration();
+$dsn = "mysql:host={$appConfig['db']['host']};port={$appConfig['db']['port']};dbname={$appConfig['db']['dbname']};charset={$appConfig['db']['charset']}";
 
-$registration->setName('Leonardo Anthony')
-    ->setBirthDate(new DateTimeImmutable('2000-01-01'))
-    ->setEmail(new Email('leonardoanthony.dev@gmail.com'))
-    ->setRegistrationAt(new DateTimeImmutable())
-    ->setRegistrationNumber(new Cpf('660.210.800-09'));
-;
+$pdo = new PDO($dsn, $appConfig['db']['username'], $appConfig['db']['password'], [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_PERSISTENT => true
+]);
 
-//* Usecases
-
-$repository = new stdClass();
+$repository = new PdoRegistrationRepository($pdo);
 $pdfExporter = new Html2PdfAdapter();
 $storage = new LocalStorageAdapter();
 
-$content = $pdfExporter->generate($registration);
-$storage->store('test.pdf',__DIR__.'/../storage/registrations', $content);
+$entity = $repository->loadByRegistrationNumber(new Cpf('70259789496'));
 
-die();
+// $content = $pdfExporter->generate($registration);
+// $storage->store('test.pdf',__DIR__.'/../storage/registrations', $content);
 
 
-$exportRegistrationUseCase = new ExportRegistration($repository, $pdfExporter, $storage);
-$inputBoundary = new InputBoundary('660.210.800-09', 'registration', __DIR__.'/../storage');
-$outputBoundary = $exportRegistrationUseCase->handle($inputBoundary);
+
+// $exportRegistrationUseCase = new ExportRegistration($repository, $pdfExporter, $storage);
+// $inputBoundary = new InputBoundary('660.210.800-09', 'registration', __DIR__.'/../storage');
+// $outputBoundary = $exportRegistrationUseCase->handle($inputBoundary);
 
